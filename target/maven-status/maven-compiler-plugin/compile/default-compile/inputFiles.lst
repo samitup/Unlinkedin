@@ -2,14 +2,15 @@ C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unli
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\model\Account.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\model\UserInfo.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\repositories\ImageObjectRepository.java
+C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\model\Reply.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\repositories\ProfileImageRepository.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\services\CustomUserDetailsService.java
-C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\AppInitializer.java
+C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\repositories\ReplyRepository.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\ServiceApplication.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\services\ProfileImageService.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\Controllers\ProfileController.java
-C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\Controllers\UserController.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\services\AccountService.java
+C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\services\ReplyService.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\configurations\SecurityConfiguration.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\model\Messages.java
 C:\Users\tuppu\Documents\NetBeansProjects\UnLinkedIn\src\main\java\fi\samit\unlinked\service\repositories\AccountRepository.java

@@ -59,4 +59,10 @@ public class AccountService {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.save(account);
     }
+
+    void deleteProfilePicture(Account account) {
+        account.setProfileImage(null);
+        accountRepository.save(account);
+    }
+    
 }

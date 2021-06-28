@@ -1,15 +1,12 @@
 package fi.samit.unlinked.service.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,17 +18,19 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Messages extends AbstractPersistable<Long> {
-  @Id
+public class Reply extends AbstractPersistable<Long> {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private int likes;
-    private LocalDateTime messageDate;
+    private LocalDateTime replyDate;
     @ManyToOne(fetch = FetchType.LAZY)
     private Account receiver;
     @ManyToOne(fetch = FetchType.LAZY)
     private Account sender;
-    @OneToMany
-    private List<Reply> reply=new ArrayList();
+    @ManyToOne
+    private Messages message;
+    
+
 }

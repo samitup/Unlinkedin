@@ -6,7 +6,6 @@ fi\samit\unlinked\service\repositories\ProfileImageRepository.class
 fi\samit\unlinked\service\services\UserInfoService.class
 fi\samit\unlinked\service\repositories\ImageObjectRepository.class
 fi\samit\unlinked\service\services\CustomUserDetailsService.class
-fi\samit\unlinked\service\AppInitializer.class
 fi\samit\unlinked\service\Controllers\AlbumController.class
 fi\samit\unlinked\service\ServiceApplication.class
 fi\samit\unlinked\service\model\Messages.class
@@ -21,5 +20,4 @@ fi\samit\unlinked\service\services\ProfileImageService.class
 fi\samit\unlinked\service\configurations\SecurityConfiguration.class
 fi\samit\unlinked\service\repositories\UserInfoRepository.class
 fi\samit\unlinked\service\Controllers\ProfileController.class
-fi\samit\unlinked\service\Controllers\UserController.class
 fi\samit\unlinked\service\model\Account.class

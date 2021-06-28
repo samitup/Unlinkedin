@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>Layout</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    </head>
+    <body>
+        <div th:fragment="comments" id="fragmentcomments">
+            <div class="container mt-3"
+                 <h2>Nested Media Objects, yet another social media internet node YASMIN</h2>
+                <p>Media objects can also be nested (a media object inside a media object):</p><br/>
+                <div class="media border p-3"th:each="message : ${messages}">
+                    <div th:each="entry: ${sendersPic}">
+                        <div th:if="${entry.key == message.sender}">
+                            <img th:src="*{'data:image/jpg;base64,'+entry.value}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        </div>
+                    </div>
+                    <div class="media-body" >
+
+                        <form  class="row" method="DELETE" th:action="@{/kayttajat/} + ${account.username} + '/kommentit/' +${message.id}"> 
+                            <h4><a th:href="@{/kayttajat/} + ${message.sender.username}">[[${message.sender.username}]]</a><small><i th:text="' Lähetetty, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
+                            <div class="col" th:if="${account.username}==${currentUser}">
+                                <input  type="submit" value="Poista" class="btn btn-link"/>
+                            </div>
+                        </form> 
+                        <div>
+                            <p style="word-wrap: break-word" th:text="${message.content}">content</p>
+                        </div>
+
+                        <div class="media p-3" th:each="rep : ${reply}" th:if="${message.id}==${rep.message.id}">
+                            <div th:each="ent: ${replyPic}">
+                                <div th:if="${ent.key == rep.sender}">
+                                    <img th:src="*{'data:image/jpg;base64,'+ent.value}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div>
+                                    <div th:if="${message.id}==${rep.message.id}"> 
+                                        <h4><a th:href="@{/kayttajat/} + ${rep.sender.username}">[[${rep.sender.username}]]</a><small><i th:text="' Vastattu, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
+                                        <p th:text="${rep.content}"></p>
+                                    </div>
+                                </div>
+
+
+                                <script type="text/javascript">
+                                    var messageId = /*[[${message.id}]]*/ 'default';
+                                    document.body.onload = function()
+                                    {
+                                    loadReply(messageId);
+                                    }
+                                </script>
+                                <script th:inline="javascript">
+                                    /*<![CDATA[*/
+
+                                    var message = /*[[${account.username}]]*/ 'default';
+
+
+                                    /*]]>*/
+                                </script>
+                                <script th:inline="javascript"> var contextRoot = /*[[@{/}]]*/ '';</script>
+                                <script th:src="@{/javascript/postrequest.js}" defer></script>
+                            </div>
+                        </div>
+                        <form class="row" id="replyForm">
+                            <div class="col">
+                                <input type="text" th:maxlength="250" placeholder="max message size 250" name="reply" class="form-control" th:id="'replyField-'+${message.id}"/>
+                            </div>
+                            <div class="col">
+                                <input id="replyButton" type="button" th:onclick="'javascript:addReply('+${message.id}+')'" value="Lisää vastaus" class="btn btn-primary"/>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+                <script>
+                    var inputs = document.querySelectorAll('input[name="reply"]');
+                    for (var i=0; i<inputs.length; ++i) {
+                    inputs[i].addEventListener('click', clickFunc);
+                    }
+                    function clickFunc() {
+                    var id = this.id;
+                    var newValue = id.replace('replyField-', '');
+                    $('#'+id).keypress(function(event){
+                    var keycode = (event.keyCode ? event.keyCode : event.which);
+                    if(keycode == '13'){
+                    event.preventDefault();
+                    addReply(newValue);
+                    }
+                    });}
+                </script>
+            </div>
+        </div>
+    </body>
+</html>

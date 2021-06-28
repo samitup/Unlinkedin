@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -22,6 +24,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicUpdate
 public class Account extends AbstractPersistable<Long> implements Serializable {
 
     @Id
@@ -42,7 +45,7 @@ public class Account extends AbstractPersistable<Long> implements Serializable {
     @OneToMany(mappedBy = "account")
     private List<ImageObject> imageObjects = new ArrayList<>();
 
-    @ManyToOne
+    @OneToOne(mappedBy ="account")
     private ProfileImage profileImage;
 
     @OneToMany(mappedBy = "account")

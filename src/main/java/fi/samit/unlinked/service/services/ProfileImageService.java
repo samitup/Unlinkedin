@@ -1,8 +1,10 @@
 package fi.samit.unlinked.service.services;
 
 import fi.samit.unlinked.service.model.Account;
+import fi.samit.unlinked.service.model.Messages;
 import fi.samit.unlinked.service.model.ProfileImage;
 import fi.samit.unlinked.service.repositories.AccountRepository;
+import fi.samit.unlinked.service.repositories.MessageRepository;
 import fi.samit.unlinked.service.repositories.ProfileImageRepository;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,28 +31,39 @@ public class ProfileImageService {
     private AccountService accountService;
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Autowired
+    private MessageRepository messageRepository;
 
     public void changeProfilePicture(String name, String data) throws IOException {
         Account loggedInUser = accountService.getAuthenticatedAccount();
         String imageDataBytes = data.substring(data.indexOf(",") + 1);
         InputStream stream = new ByteArrayInputStream(Base64.getMimeDecoder().decode(imageDataBytes.getBytes()));
 
-        ProfileImage profileImage = new ProfileImage();
-        byte[] imageData = stream.readAllBytes();
-
+        //   ProfileImage profileImage = new ProfileImage();
+        //   byte[] imageData = stream.readAllBytes();
         if (profileImageRepository.findByAccount(loggedInUser)
                 == null && name.equals(loggedInUser.getUsername())) {
+            ProfileImage profileImage = new ProfileImage();
+            byte[] imageData = stream.readAllBytes();
             profileImage.setContent(imageData);
             profileImage.setAccount(loggedInUser);
+            loggedInUser.setProfileImage(profileImage);
+            accountRepository.save(loggedInUser);
             profileImageRepository.save(profileImage);
         } else if (profileImageRepository.findByAccount(loggedInUser)
                 != null && name.equals(loggedInUser.getUsername())) {
+            ProfileImage profileImage = new ProfileImage();
+            byte[] imageData = stream.readAllBytes();
             profileImage = profileImageRepository.findByAccount(loggedInUser);
             profileImageRepository.delete(profileImage);
+            accountService.deleteProfilePicture(loggedInUser);
             profileImage.setName(null);
             profileImage.setContent(null);
             profileImage.setAccount(loggedInUser);
             profileImage.setContent(imageData);
+            loggedInUser.setProfileImage(profileImage);
+            accountRepository.save(loggedInUser);
             profileImageRepository.save(profileImage);
         }
     }
@@ -65,11 +78,21 @@ public class ProfileImageService {
         ProfileImage t = profileImageRepository.findByAccount(accountService.getAccount(name));             //tarkistetaan että kirjautunut käyttäjä
         if (name.equals(username) && t != null) {
             profileImageRepository.delete(t);
+            Account account = accountRepository.findByUsername(username);
+            account.setProfileImage(null);
+            accountRepository.save(account);
+            for (Messages message : messageRepository.findAll()) {
+            if(message.getSender().getUsername().equals(username)){
+                message.getSender().setProfileImage(null);
+                messageRepository.save(message);
+            }
+        }
+            
         }
     }
 
-    public Map getAllProfileImages() throws UnsupportedEncodingException {
-        Map byteImages = new HashMap();
+    public HashMap getAllProfileImages() throws UnsupportedEncodingException {
+        HashMap byteImages = new HashMap();
         List<ProfileImage> images = profileImageRepository.findAll();
         for (ProfileImage img : images) {
             byte[] encode = Base64.getMimeEncoder().encode(img.getContent());
