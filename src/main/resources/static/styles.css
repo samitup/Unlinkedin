@@ -1,15 +1,40 @@
 body { 
-    background-color: rgb(90, 213, 230);
+    background-color: #639fff;
     background-size: cover;
 }
+P{
+    word-break: break-word;
+}
 #roundBorders{
-    background-color: rgba(192, 205, 207, 0.2);
-    box-shadow: 10px 10px 5px grey;
-    border: 2px solid rgba(3, 95, 107, 0.83);
+    background-color: #639fff;
+    box-shadow: 10px 10px 5px #033382;
+    border: 2px solid white;
     padding: 30px;
 
 }
 
 .jumbotron{
-    background: none;
+  
+  /* can be treated like a fallback */
+  background-color: red;
+
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(#0C27F3, red);
+
+  /* these will reset other properties, like background-position, but it does know what you mean */
+  background: red;
+  background: linear-gradient(#033382, #639fff);
+  
+    
+}
+#footer{
+     /* can be treated like a fallback */
+  background-color: red;
+
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(#3838f2, red);
+
+  /* these will reset other properties, like background-position, but it does know what you mean */
+  background: red;
+  background: linear-gradient(#639fff, #033382);
 }

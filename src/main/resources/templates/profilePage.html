@@ -63,7 +63,7 @@
                         <ul style='list-style: none;'>
                             <li th:each="info : ${infos}">
                                 <form  class="row" method="DELETE" th:action="@{/kayttajat/} + ${account.username} + '/info/' +${info.id}"> 
-                                    <p style="overflow-wrap: break-word" th:text="${info.content}">infocontent</p>
+                                    <p th:text="${info.content}">infocontent</p>
                                     <div class="col" th:if="${account.username}==${currentUser}">
                                         <input  type="submit" value="Poista" class="btn btn-link"/>
                                     </div>
@@ -122,7 +122,7 @@
         </div>
         </div>
         <div id="footer" class="jumbotron text-center" style="margin-bottom:0">
-            <p>Footer</p>
+            <p></p>
         </div>
 
     </body>

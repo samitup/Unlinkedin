@@ -156,7 +156,7 @@ public class ProfileController {
 
         return "redirect:/kayttajat/" + encodedUsername + "/kommentit";
     }
-
+   
     @GetMapping("/kayttajat/{name}/kommentit/{messageId}/reply")
     public String getReplies(Model model, @PathVariable String name, @PathVariable Long messageId) throws UnsupportedEncodingException {
         String formattedUsername = name.replace("+", " ");

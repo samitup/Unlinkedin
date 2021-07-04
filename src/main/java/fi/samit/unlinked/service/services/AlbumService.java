@@ -29,7 +29,8 @@ public class AlbumService {
                 e.printStackTrace();
             }
         }
-        return images;
+        TreeMap<Long,String> sorted = new TreeMap<>(images);
+        return sorted;
     }
 
     public void postImageToAlbum(String profileName, MultipartFile file) throws IOException {

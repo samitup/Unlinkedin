@@ -7,6 +7,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+        <link href="/styles.css" rel="stylesheet" />
     </head>
     <body>
         <div th:fragment="comments" id="fragmentcomments">
@@ -28,7 +29,7 @@
                             </div>
                         </form> 
                         <div>
-                            <p style="word-wrap: break-word" th:text="${message.content}">content</p>
+                            <p th:text="${message.content}">content</p>
                         </div>
 
                         <div class="media p-3" th:each="rep : ${reply}" th:if="${message.id}==${rep.message.id}">
@@ -38,14 +39,11 @@
                                 </div>
                             </div>
                             <div class="media-body">
-                                <div>
                                     <div th:if="${message.id}==${rep.message.id}"> 
-                                        <h4><a th:href="@{/kayttajat/} + ${rep.sender.username}">[[${rep.sender.username}]]</a><small><i th:text="' Vastattu, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
+                                        <h4><a th:href="@{/kayttajat/} + ${rep.sender.username}">[[${rep.sender.username}]]</a><small><i th:text="' Lähetetty, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
                                         <p th:text="${rep.content}"></p>
                                     </div>
-                                </div>
-
-
+                                 
                                 <script type="text/javascript">
                                     var messageId = /*[[${message.id}]]*/ 'default';
                                     document.body.onload = function()

@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ImageObject extends AbstractPersistable<Long> {
+public class ImageObject extends AbstractPersistable<Long> implements Comparable<ImageObject> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +32,10 @@ public class ImageObject extends AbstractPersistable<Long> {
     @Lob
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] content;
+
+    @Override
+    public int compareTo(ImageObject o) {
+        return (int)(this.id -o.getId());
+    }
 
 }
