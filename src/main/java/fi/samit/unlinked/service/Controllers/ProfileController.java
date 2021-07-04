@@ -135,7 +135,7 @@ public class ProfileController {
             byte[] encode = Base64.getMimeEncoder().encode(is);
             model.addAttribute("images", new String(encode, "UTF-8"));
         }
-        
+
         return "usersPage";
     }
 
@@ -156,10 +156,11 @@ public class ProfileController {
 
         return "redirect:/kayttajat/" + encodedUsername + "/kommentit";
     }
-   
+
     @GetMapping("/kayttajat/{name}/kommentit/{messageId}/reply")
     public String getReplies(Model model, @PathVariable String name, @PathVariable Long messageId) throws UnsupportedEncodingException {
-        String formattedUsername = name.replace("+", " ");
+        String encodedUsername = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
+        String formattedUsername = encodedUsername.replace("+", " ");
         Account account = accountService.getAccount(formattedUsername);
         model.addAttribute("messages", messageService.getMessagesByReceiver(account));
         model.addAttribute("account", account);
