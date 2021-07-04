@@ -11,9 +11,8 @@
     </head>
     <body>
         <div th:fragment="comments" id="fragmentcomments">
-            <div class="container mt-3"
-                 <h2>Nested Media Objects, yet another social media internet node YASMIN</h2>
-                <p>Media objects can also be nested (a media object inside a media object):</p><br/>
+            <div class="container mt-3">
+                <div th:unless="${!#lists.isEmpty(messages)}"><i>Kirjoita jotain!</i> </div>
                 <div class="media border p-3"th:each="message : ${messages}">
                     <div th:each="entry: ${sendersPic}">
                         <div th:if="${entry.key == message.sender}">
@@ -39,11 +38,11 @@
                                 </div>
                             </div>
                             <div class="media-body">
-                                    <div th:if="${message.id}==${rep.message.id}"> 
-                                        <h4><a th:href="@{/kayttajat/} + ${rep.sender.username}">[[${rep.sender.username}]]</a><small><i th:text="' Lähetetty, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
-                                        <p th:text="${rep.content}"></p>
-                                    </div>
-                                 
+                                <div th:if="${message.id}==${rep.message.id}"> 
+                                    <h4><a th:href="@{/kayttajat/} + ${rep.sender.username}">[[${rep.sender.username}]]</a><small><i th:text="' Lähetetty, '+${#temporals.format(message.messageDate, 'dd.MM.yyyy-HH:mm ')}">Posted on February 19, 2016</i></small></h4>
+                                    <p th:text="${rep.content}"></p>
+                                </div>
+
                                 <script type="text/javascript">
                                     var messageId = /*[[${message.id}]]*/ 'default';
                                     document.body.onload = function()
