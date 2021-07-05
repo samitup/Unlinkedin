@@ -33,7 +33,12 @@
                 $('#fragmentcomments').load(replyUrl);
    
                }
-            
+            function bodyOnLoad(){
+                 document.body.onload = function()
+                   {
+                      loadReply(messageId);
+                   }
+            }
             
 
                                     
