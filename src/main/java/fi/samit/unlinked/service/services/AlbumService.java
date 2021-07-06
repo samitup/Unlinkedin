@@ -37,9 +37,7 @@ public class AlbumService {
         String loggedInUsername = accountService.getAuthenticatedAccount().getUsername();
         ImageObject image = new ImageObject();
         System.out.println("ContentType :"+file.getContentType());
-        if (profileName.equals(loggedInUsername) && file.isEmpty() == false && !(file.getContentType().equals("image/jpeg") ||
-                file.getContentType().equals("image/jpg") || 
-                file.getContentType().equals("image/png")))throw new IOException("Filetype is incorrect! Only png, jpg and jpeg are allowed"); {
+        if (profileName.equals(loggedInUsername) && file.isEmpty() == false) {
             Account account = accountService.getAccount(profileName);
             image.setContent(file.getBytes());
             image.setAccount(account);

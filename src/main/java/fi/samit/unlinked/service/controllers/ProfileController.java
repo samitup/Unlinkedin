@@ -1,4 +1,4 @@
-package fi.samit.unlinked.service.Controllers;
+package fi.samit.unlinked.service.controllers;
 
 import fi.samit.unlinked.service.model.Account;
 import fi.samit.unlinked.service.model.ProfileImage;

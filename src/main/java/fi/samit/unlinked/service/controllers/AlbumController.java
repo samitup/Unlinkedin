@@ -1,5 +1,6 @@
-package fi.samit.unlinked.service.Controllers;
+package fi.samit.unlinked.service.controllers;
 
+import fi.samit.unlinked.service.annotations.ValidImage;
 import fi.samit.unlinked.service.model.Account;
 import fi.samit.unlinked.service.services.AlbumService;
 import fi.samit.unlinked.service.model.ImageObject;
@@ -14,12 +15,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+@Validated
 @Controller
 public class AlbumController {
 
@@ -30,7 +32,7 @@ public class AlbumController {
     private AccountService accountService;
 
     @PostMapping("/kayttajat/{profileName}/albumi")
-    public String postImageToAlbum(@PathVariable String profileName, @RequestParam("file") MultipartFile file) throws IOException {
+    public String postImageToAlbum(@PathVariable String profileName, @ValidImage @RequestParam("file") MultipartFile file) throws IOException {
         String encodedUsername = URLEncoder.encode(profileName, StandardCharsets.UTF_8.toString());
         String formattedUsername = profileName.replace("+", " ");
         albumService.postImageToAlbum(formattedUsername, file);

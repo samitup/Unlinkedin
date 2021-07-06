@@ -1,8 +1,6 @@
 package fi.samit.unlinked.service.model;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +30,7 @@ public class ImageObject extends AbstractPersistable<Long> implements Comparable
     @Lob
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] content;
-
+    
     @Override
     public int compareTo(ImageObject o) {
         return (int)(this.id -o.getId());
