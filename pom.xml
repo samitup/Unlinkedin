@@ -12,7 +12,7 @@
     <artifactId>service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>service</name>
-    <description>University LinkedIn school project</description>
+    <description>Social media project for fun</description>
     <properties>
         <java.version>14</java.version> 
         <spring-cloud.version>2020.0.1</spring-cloud.version>
