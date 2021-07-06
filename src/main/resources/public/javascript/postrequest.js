@@ -1,4 +1,4 @@
-                var url = encodeURI("/kayttajat/" +message+ "/kommentit");
+                var url = encodeURI("/kayttajat/" +username+ "/kommentit");
                 var http = new XMLHttpRequest();
                 http.onreadystatechange = function() {
                     if (this.readyState != 4) {
@@ -20,7 +20,7 @@
                }
                 
                 function addReply(messageId) {
-                    var replyUrl = encodeURI("/kayttajat/" +message+ "/kommentit/" +messageId+ "/reply");
+                    var replyUrl = encodeURI("/kayttajat/" +username+ "/kommentit/" +messageId+ "/reply");
                     var reply =  document.getElementById("replyField-"+messageId).value;
                     http.open("POST", replyUrl,false);
                     http.send(reply);
@@ -29,7 +29,7 @@
                     }
 
                function loadReply(messageId){
-                    var replyUrl = encodeURI("/kayttajat/" +message+ "/kommentit" );
+                    var replyUrl = encodeURI("/kayttajat/" +username+ "/kommentit" );
                 $('#fragmentcomments').load(replyUrl);
    
                }
@@ -39,6 +39,9 @@
                       loadReply(messageId);
                    }
             }
+
+                    
+                    
             
 
                                     
