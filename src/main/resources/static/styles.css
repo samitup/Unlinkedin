@@ -8,6 +8,9 @@ p{
 i{
     word-break: break-word;
 }
+h4{
+    word-break: break-word;
+}
 #roundBorders{
     background-color: #639fff;
     box-shadow: 10px 10px 5px #033382;
