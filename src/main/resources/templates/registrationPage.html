@@ -7,6 +7,10 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
                   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
                   crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
             <link href="/styles.css" rel="stylesheet" />
     </head>
     <body>
@@ -14,19 +18,21 @@
             <h1>Tervetuloa käyttämään Unlinked:ia</h1>
             <p>Unlinked - reinventing the wheel.</p> 
         </div>
-        <nav class="navbar navbar-expand-sm bg-transparent navbar-dark">
-            <a class="navbar-brand" href="#">Unlinked</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/login}">Login</a>
-                    </li>
-                </ul>
-            </div>  
-        </nav>
+        <header>
+            <nav id="roundBorders" class="navbar  navbar-expand-sm  navbar-dark" style="margin-bottom:20px">
+                <a class="navbar-brand" >Unlinked</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Kirjaudu sisään</a>
+                        </li>
+                    </ul>
+                </div>  
+            </nav>
+        </header>
         <div class="container-fluid text-center">
             <form method="POST" th:object="${account}" th:action="@{/rekisteroidy}"  style="max-width: 350px; margin: 0 auto;">
                 <div class="border border-secondary p-3 rounded">
