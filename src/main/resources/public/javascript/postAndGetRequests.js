@@ -8,6 +8,8 @@
                 }
 
                 function addComment() {
+                var commentButton = document.getElementById("formButton");
+                commentButton.disabled = true;
                     var post =  document.getElementById("commentField").value;
                     http.open("POST", url,false);
                     http.send(post);
@@ -16,10 +18,12 @@
                 }
                function loadComments(){
                 $('#fragmentcomments').load(url);
-   
+                commentButton.disabled = false;
                }
                 
                 function addReply(messageId) {
+                    var replyButton = document.getElementById("replyButton");
+                    replyButton.disabled = true;
                     var replyUrl = encodeURI("/kayttajat/" +username+ "/kommentit/" +messageId+ "/reply");
                     var reply =  document.getElementById("replyField-"+messageId).value;
                     http.open("POST", replyUrl,false);
@@ -31,6 +35,7 @@
                function loadReply(messageId){
                     var replyUrl = encodeURI("/kayttajat/" +username+ "/kommentit" );
                 $('#fragmentcomments').load(replyUrl);
+                replyButton.disabled = false;
    
                }
             function bodyOnLoad(){
