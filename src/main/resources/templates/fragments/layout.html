@@ -68,7 +68,7 @@
                     var newValue = id.replace('replyField-', '');
                     $('#'+id).keypress(function(event){
                     var keycode = (event.keyCode ? event.keyCode : event.which);
-                    if(keycode == '13'){
+                    if(keycode == '13' && document.getElementById("replyButton").disabled == false){
                     event.preventDefault();
                     addReply(newValue);
                     }
