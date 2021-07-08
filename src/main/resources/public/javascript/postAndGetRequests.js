@@ -8,7 +8,7 @@
                 }
 
                 function addComment() {
-                var commentButton = document.getElementById("formButton");
+                var commentButton = document.getElementById("commentButton");
                 commentButton.disabled = true;
                     var post =  document.getElementById("commentField").value;
                     http.open("POST", url,false);
