@@ -17,8 +17,13 @@
                     loadComments(); 
                 }
                function loadComments(){
-                $('#fragmentcomments').load(url);
-                commentButton.disabled = false;
+                $('#fragmentcomments').load(url, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") {
+                    commentButton.disabled = false;
+                    }
+                    if (statusTxt == "error") 
+                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                    });
                }
                 
                 function addReply(messageId) {
@@ -34,9 +39,13 @@
 
                function loadReply(messageId){
                     var replyUrl = encodeURI("/kayttajat/" +username+ "/kommentit" );
-                $('#fragmentcomments').load(replyUrl);
-                replyButton.disabled = false;
-   
+                $('#fragmentcomments').load(replyUrl, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") {
+                    replyButton.disabled = false;
+                    }
+                    if (statusTxt == "error") 
+                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                    });   
                }
             function bodyOnLoad(){
                  document.body.onload = function()
