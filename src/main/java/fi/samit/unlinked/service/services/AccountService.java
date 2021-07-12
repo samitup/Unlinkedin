@@ -3,7 +3,6 @@ package fi.samit.unlinked.service.services;
 import fi.samit.unlinked.service.model.Account;
 import fi.samit.unlinked.service.repositories.AccountRepository;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

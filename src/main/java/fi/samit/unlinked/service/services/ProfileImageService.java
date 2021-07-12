@@ -10,12 +10,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -29,9 +26,10 @@ public class ProfileImageService {
 
     @Autowired
     private AccountService accountService;
+
     @Autowired
     private AccountRepository accountRepository;
-    
+
     @Autowired
     private MessageRepository messageRepository;
 
@@ -40,8 +38,7 @@ public class ProfileImageService {
         String imageDataBytes = data.substring(data.indexOf(",") + 1);
         InputStream stream = new ByteArrayInputStream(Base64.getMimeDecoder().decode(imageDataBytes.getBytes()));
 
-        //   ProfileImage profileImage = new ProfileImage();
-        //   byte[] imageData = stream.readAllBytes();
+
         if (profileImageRepository.findByAccount(loggedInUser)
                 == null && name.equals(loggedInUser.getUsername())) {
             ProfileImage profileImage = new ProfileImage();
@@ -82,12 +79,12 @@ public class ProfileImageService {
             account.setProfileImage(null);
             accountRepository.save(account);
             for (Messages message : messageRepository.findAll()) {
-            if(message.getSender().getUsername().equals(username)){
-                message.getSender().setProfileImage(null);
-                messageRepository.save(message);
+                if (message.getSender().getUsername().equals(username)) {
+                    message.getSender().setProfileImage(null);
+                    messageRepository.save(message);
+                }
             }
-        }
-            
+
         }
     }
 
@@ -107,7 +104,6 @@ public class ProfileImageService {
             InputStream input = resource.getInputStream();
             byte[] is = input.readAllBytes();
             String encode = Base64.getMimeEncoder().encodeToString(is);
-            // changeProfilePicture(accountService.getAuthenticatedAccount().getUsername(), encode);
             String imageDataBytes = encode.substring(encode.indexOf(",") + 1);
             InputStream stream = new ByteArrayInputStream(Base64.getMimeDecoder().decode(imageDataBytes.getBytes()));
             ProfileImage profileImage = new ProfileImage();

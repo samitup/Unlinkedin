@@ -1,7 +1,6 @@
 package fi.samit.unlinked.service.controllers;
 
-import fi.samit.unlinked.service.services.ProfileImageService;
-import java.io.IOException;
+import fi.samit.unlinked.service.services.UserInfoService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -10,26 +9,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ProfileImageController {
+public class InfoController {
 
     @Autowired
-    private ProfileImageService profileImageService;
+    private UserInfoService userInfoService;
 
-    @PostMapping("/kayttajat/{name}/profiilikuva")
-    public String postProfileImage(@PathVariable String name, @RequestBody String data) throws IOException {
+    @PostMapping("/kayttajat/{name}/info")
+    public String postInfo(@PathVariable String name,
+            @RequestParam(required = false) String infoContent) throws UnsupportedEncodingException {
         String encodedUsername = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
-        String formattedUsername = name.replace("+", " ");
-        profileImageService.changeProfilePicture(formattedUsername, data);
+        userInfoService.postInfo(name, infoContent);
         return "redirect:/kayttajat/" + encodedUsername;
+
     }
 
-    @GetMapping("/kayttajat/{name}/profiilikuva")
-    public String deleteProfileImage(@PathVariable String name) throws UnsupportedEncodingException {
+    @GetMapping("/kayttajat/{name}/info/{id}")
+    public String deleteInfo(@PathVariable String name,
+            @PathVariable Long id) throws UnsupportedEncodingException {
         String encodedUsername = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
-        profileImageService.deleteProfileImage(name);
+        userInfoService.deleteInfo(name, id);
         return "redirect:/kayttajat/" + encodedUsername;
     }
 }
