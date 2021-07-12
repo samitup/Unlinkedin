@@ -25,8 +25,9 @@
             <form th:action="@{/kayttajat/{profileName}/albumi(profileName=${account.username})}"
                   method="POST"
                   enctype="multipart/form-data">
-                <input type="file" name="file" accept="image/*" class="form-control"/>
+                <input type="file"  name="file" accept="image/*" class="form-control"/>
                 <input type="submit" value="Lähetä kuva" class="btn btn-primary"/>
+                <p th:text="${wrongFileType}" style="color:red" th:if="${wrongFileType ne null}">content</p>
             </form>
         </div>
         <br/>

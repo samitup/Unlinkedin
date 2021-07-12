@@ -9,19 +9,20 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-@Validated
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 public class AlbumController {
 
@@ -32,9 +33,17 @@ public class AlbumController {
     private AccountService accountService;
 
     @PostMapping("/kayttajat/{profileName}/albumi")
-    public String postImageToAlbum(@PathVariable String profileName, @ValidImage @RequestParam("file") MultipartFile file) throws IOException {
+    public String postImageToAlbum(@PathVariable String profileName,  @RequestParam("file") MultipartFile file, RedirectAttributes attributes) throws IOException {
         String encodedUsername = URLEncoder.encode(profileName, StandardCharsets.UTF_8.toString());
         String formattedUsername = profileName.replace("+", " ");
+        List acceptedImageTypes = new ArrayList<>();
+        acceptedImageTypes.add("image/png");
+        acceptedImageTypes.add("image/jpg");
+        acceptedImageTypes.add("image/jpeg");
+        if(!acceptedImageTypes.contains(file.getContentType())){
+             attributes.addFlashAttribute("wrongFileType", "Only png, jpg and jpeg file types are allowed!");
+            return "redirect:/kayttajat/" + encodedUsername + "/albumi";
+        }
         albumService.postImageToAlbum(formattedUsername, file);
         return "redirect:/kayttajat/" + encodedUsername + "/albumi";
     }

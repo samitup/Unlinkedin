@@ -36,7 +36,6 @@ public class AlbumService {
     public void postImageToAlbum(String profileName, MultipartFile file) throws IOException {
         String loggedInUsername = accountService.getAuthenticatedAccount().getUsername();
         ImageObject image = new ImageObject();
-        System.out.println("ContentType :"+file.getContentType());
         if (profileName.equals(loggedInUsername) && file.isEmpty() == false) {
             Account account = accountService.getAccount(profileName);
             image.setContent(file.getBytes());

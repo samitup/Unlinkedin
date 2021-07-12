@@ -66,9 +66,18 @@ public class ProfileController {
             model.addAttribute("imageData", image);
             model.addAttribute("imageContent", new String(encode, "UTF-8"));
         }
-        model.addAttribute("reply", replyService.getAllReplies());
-        model.addAttribute("sendersPic", messageService.getMessageSendersProfilePictures());
-        model.addAttribute("replyPic", replyService.getProfilePicturesOfReplySender());
+        if (replyService.getRepliesByReceiver(account) != null) {
+            model.addAttribute("reply", replyService.getRepliesByReceiver(account));
+
+        }
+        if (replyService.getProfilePicturesOfReplySender() != null) {
+            model.addAttribute("replyPic", replyService.getProfilePicturesOfReplySender());
+
+        }
+        if (messageService.getMessageSendersProfilePictures() != null) {
+            model.addAttribute("sendersPic", messageService.getMessageSendersProfilePictures());
+
+        }
 
         return "profilePage";
     }
@@ -82,7 +91,7 @@ public class ProfileController {
         model.addAttribute("account", account);
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("replyPic", replyService.getProfilePicturesOfReplySender());
-        model.addAttribute("reply", replyService.getAllReplies());
+        model.addAttribute("reply", replyService.getRepliesByReceiver(account));
         model.addAttribute("sendersPic", messageService.getMessageSendersProfilePictures());
 
         return "fragments/layout::comments";
@@ -153,7 +162,6 @@ public class ProfileController {
     public String postReply(@PathVariable String name, @PathVariable Long messageId, @RequestBody(required = false) String reply) throws UnsupportedEncodingException {
         String encodedUsername = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
         replyService.postReply(name, reply, messageService.getMessageById(messageId));
-
         return "redirect:/kayttajat/" + encodedUsername + "/kommentit";
     }
 

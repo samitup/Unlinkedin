@@ -42,6 +42,9 @@ public class ReplyService {
     public List<Reply> getRepliesByMessageId(Long messageId) {
         return replyRepository.findByMessageId(messageId);
     }
+    public List<Reply> getRepliesByReceiver(Account account){
+        return replyRepository.findByReceiver(account);
+    }
 
     public HashMap<Account, String> getProfilePicturesOfReplySender() throws UnsupportedEncodingException {
         HashMap<Account, String> replyProfilePictures = profileImageService.getAllProfileImages();
